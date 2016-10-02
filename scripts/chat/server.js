@@ -29,8 +29,8 @@ socket.on('connection',
         client.on('login', 
             function(uid)
             {
-                UID.set(client, uid);
                 //console.log(uid + 'joined the chat.');
+                UID.set(client, uid);
                 for(var [key, val] of UID.entries())
                 {
                     key.send('<div class="systeminfo">用户' + uid + '加入了。</div>');
@@ -45,9 +45,9 @@ socket.on('connection',
                 for(var [key, val] of UID.entries())
                 {
                     if(uid == val)
-                        key.send('<div><table width="100%"><tr><td><div class="chattext2">' + htmlspecialchars(message) + '</div></td><td width="4em">' + uid + '</td></tr></table></div>');
+                        key.send('<div><table width="100%"><tr><td><div class="chattext2">' + htmlspecialchars(message) + '</div></td><td class="uid">' + uid + '</td></tr></table></div>');
                     else
-                        key.send('<div><table width="100%"><tr><td width="4em">' + uid + '</td><td><div class="chattext">' + htmlspecialchars(message) + '</div></td></tr></table></div>');
+                        key.send('<div><table width="100%"><tr><td class="uid">' + uid + '</td><td><div class="chattext">' + htmlspecialchars(message) + '</div></td></tr></table></div>');
                 }
             }
         );
@@ -55,8 +55,13 @@ socket.on('connection',
         client.on('disconnect', 
             function()
             {
-                UID.delete(client);
                 //console.log('Client disconnected.');
+                var uid = UID.get(client);
+                UID.delete(client);
+                for(var [key, val] of UID.entries())
+                {
+                    key.send('<div class="systeminfo">用户' + uid + '离开了。</div>');
+                }
             }
         );
     }

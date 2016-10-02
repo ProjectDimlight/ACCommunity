@@ -1,0 +1,2 @@
+CREATE DATABASE `ProjectAC` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+CREATE TABLE `projectac`.`user` ( `uid` SERIAL NOT NULL , `nickname` TINYTEXT NOT NULL , `password` TINYTEXT NOT NULL , `time` DATETIME NOT NULL , `motto` TEXT NOT NULL , `vip` TINYINT NOT NULL , `exp` INT NOT NULL , `ban` BOOLEAN NOT NULL , `email` TEXT NOT NULL ) ENGINE = InnoDB;
