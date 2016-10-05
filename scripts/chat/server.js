@@ -9,6 +9,7 @@ function htmlspecialchars(str)
 }  
 
 var UID = new Map();
+var UNAME = new Map();
 
 var http = require('http');
 var io = require('socket.io');
@@ -27,13 +28,14 @@ socket.on('connection',
     function(client)
     {
         client.on('login', 
-            function(uid)
+            function(uid, username)
             {
                 //console.log(uid + 'joined the chat.');
                 UID.set(client, uid);
+                UNAME.set(client, username);
                 for(var [key, val] of UID.entries())
                 {
-                    key.send('<div class="systeminfo">用户' + uid + '加入了。</div>');
+                    key.send('<div class="systeminfo">' + username + '加入了。</div>');
                 }
             }
         );
@@ -41,13 +43,15 @@ socket.on('connection',
         client.on('message', 
             function(uid, message)
             {
+                if(message == '')
+                    return;
                 //console.log(uid + ': ' + message);
                 for(var [key, val] of UID.entries())
                 {
                     if(uid == val)
-                        key.send('<div><table width="100%"><tr><td><div class="chattext2">' + htmlspecialchars(message) + '</div></td><td class="uid">' + uid + '</td></tr></table></div>');
+                        key.send('<div><table width="100%"><tr><td><div class="chattext2">' + htmlspecialchars(message) + '</div></td><td class="uid" valign="top"><img height=30 width=30 src="/images/user/' + uid + '/head.jpg"/></td></tr></table></div>');
                     else
-                        key.send('<div><table width="100%"><tr><td class="uid">' + uid + '</td><td><div class="chattext">' + htmlspecialchars(message) + '</div></td></tr></table></div>');
+                        key.send('<div><table width="100%"><tr><td class="uid" valign="top"><img height=30 width=30 src="/images/user/' + uid + '/head.jpg"/></td><td><div class="chattext">' + htmlspecialchars(message) + '</div></td></tr></table></div>');
                 }
             }
         );
@@ -56,11 +60,12 @@ socket.on('connection',
             function()
             {
                 //console.log('Client disconnected.');
-                var uid = UID.get(client);
+                var username = UNAME.get(client);
                 UID.delete(client);
+                UNAME.delete(client);
                 for(var [key, val] of UID.entries())
                 {
-                    key.send('<div class="systeminfo">用户' + uid + '离开了。</div>');
+                    key.send('<div class="systeminfo">' + username + '离开了。</div>');
                 }
             }
         );
