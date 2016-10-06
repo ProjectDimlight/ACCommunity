@@ -8,6 +8,7 @@ if(isset($_SESSION['uid']))
 {
     $uid = $_SESSION['uid'];
     $username = $_SESSION['username'];
+    $password = $_SESSION['password'];
 ?>
 
 <?php echo('<script src="http://' . $hostip. ':' . $hostport . '/mgzd/scripts/chat/node_modules/socket.io-client/socket.io.js"></script>'); ?>
@@ -25,7 +26,7 @@ if(isset($_SESSION['uid']))
             function()
             {
                 //console.log('Connected to server!');
-                socket.emit('login', <?php echo($uid); ?>, <?php echo("'".$username."'"); ?>);
+                socket.emit('login', <?php echo($uid); ?>, <?php echo("'".$password."'"); ?>, <?php echo("'".$username."'"); ?>);
             }
         );
 
@@ -54,7 +55,7 @@ if(isset($_SESSION['uid']))
         var div = document.getElementById('chatinput');
         if(div.value != "")
         {
-            socket.emit('message', <?php echo($uid); ?>, div.value);
+            socket.emit('message', <?php echo("'".$password."'"); ?>, div.value);
             div.value = '';
         }else
         {

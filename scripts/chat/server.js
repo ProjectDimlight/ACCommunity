@@ -6,10 +6,11 @@ function htmlspecialchars(str)
     str = str.replace(/"/g, '&quot;');  
     str = str.replace(/'/g, '&#039;');  
     return str;  
-}  
+}
 
 var UID = new Map();
 var UNAME = new Map();
+var PASSWORD = new Map();
 
 var http = require('http');
 var io = require('socket.io');
@@ -28,23 +29,51 @@ socket.on('connection',
     function(client)
     {
         client.on('login', 
-            function(uid, username)
+            function(uid, password, username)
             {
                 //console.log(uid + 'joined the chat.');
-                UID.set(client, uid);
-                UNAME.set(client, username);
-                for(var [key, val] of UID.entries())
-                {
-                    key.send('<div class="systeminfo">' + username + '加入了。</div>');
-                }
+                var mysql = require("mysql");
+                var sql = mysql.createConnection({
+                    user: 'access',
+                    password: ''
+                });
+                sql.connect();
+                sql.query("use projectac");
+
+                var query = "select password from user where uid = ?";
+                var data = [uid];
+
+                sql.query(query, data,
+                    function(err, results, fields)   
+                    {
+                        if(results && password == results[0].password)
+                        {
+                            UID.set(client, uid);
+                            UNAME.set(client, username);
+                            PASSWORD.set(client, password);
+                            for(var [key, val] of UID.entries())
+                            {
+                                key.send('<div class="systeminfo">' + username + '加入了。</div>');
+                            }
+                            return;
+                        }
+                    }
+                );
+
+                sql.end();
             }
         );
 
         client.on('message', 
-            function(uid, message)
+            function(password, message)
             {
                 if(message == '')
                     return;
+
+                if(!PASSWORD.has(client) || password != PASSWORD.get(client))
+                    return;
+
+                var uid = UID.get(client);
                 //console.log(uid + ': ' + message);
                 for(var [key, val] of UID.entries())
                 {
@@ -60,9 +89,13 @@ socket.on('connection',
             function()
             {
                 //console.log('Client disconnected.');
+                if(!PASSWORD.has(client))
+                    return;
+
                 var username = UNAME.get(client);
                 UID.delete(client);
                 UNAME.delete(client);
+                PASSWORD.delete(client);
                 for(var [key, val] of UID.entries())
                 {
                     key.send('<div class="systeminfo">' + username + '离开了。</div>');

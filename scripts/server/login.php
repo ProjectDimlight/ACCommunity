@@ -15,6 +15,7 @@
             $flag = true;
             $_SESSION['uid'] = $row[0];
             $_SESSION['username'] = $_POST['username'];
+            $_SESSION['password'] = md5($_POST['password']);
             break;
         }
     }
