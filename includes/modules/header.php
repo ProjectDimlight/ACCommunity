@@ -1,6 +1,6 @@
 <?php session_start(); ?>
 
-<?php $hostip = 'localhost'; $hostport = 8080; ?>
+<?php $hostip = '172.20.217.62'; $hostport = 8080; $title = '寂月城' ?>
 
 <html>
     <head>

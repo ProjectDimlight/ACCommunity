@@ -1,7 +1,7 @@
 <?php include("includes/modules/header.php"); ?>
 <?php include("includes/modules/top.php"); ?>
 
-<title>冥光之都 - 版聊</title>
+<title><?php echo($title); ?>  - 版聊</title>
 
 <?php
 if(isset($_SESSION['uid']))
@@ -16,6 +16,11 @@ if(isset($_SESSION['uid']))
 
     var socket;
 
+    function showUser(uid)
+    {
+        window.location.href = "user.php?uid=" + uid;
+    }
+
     function startClient()
     {
         //var socket = new io.Socket('localhost', {port: 8081});
@@ -25,15 +30,37 @@ if(isset($_SESSION['uid']))
         socket.on('connect', 
             function()
             {
-                //console.log('Connected to server!');
                 socket.emit('login', <?php echo($uid); ?>, <?php echo("'".$password."'"); ?>, <?php echo("'".$username."'"); ?>);
+            }
+        );
+
+        socket.on('listalluser', 
+            function(message)
+            {
+                var div = document.getElementById('showuser');
+                div.innerHTML = message;
+            }
+        );
+
+        socket.on('login', 
+            function(message)
+            {
+                var div = document.getElementById('showuser');
+                div.innerHTML += message;
+            }
+        );
+
+        socket.on('logout', 
+            function(uid)
+            {
+                var div = document.getElementById('user' + uid);
+                div.parentNode.removeChild(div);
             }
         );
 
         socket.on('message',
             function(message)
             {
-                //console.log(message);
                 var div = document.getElementById('showchat');
                 div.innerHTML += message;
                 div.scrollTop = div.scrollHeight;
@@ -43,7 +70,6 @@ if(isset($_SESSION['uid']))
         socket.on('disconnect',
             function()
             {
-                //console.log('Disconnected!');
             }
         );
     }
@@ -87,8 +113,18 @@ if(isset($_SESSION['uid']))
 
 <div style='width:100%;'>
     <div class='mainchat'>
-        <div id='showchat' class='chatbox'><br/></div>
-        <textarea class='chatinput' id='chatinput'></textarea>
+        <table style='width:100%'><tr>
+            <td style='width:auto;'>
+                <div id='showchat' class='chatbox'><br/></div>
+                <textarea class='chatinput' id='chatinput'></textarea>
+            </td>
+            <td style='width:150px; border:1px solid; overflow-y: scroll;' valign="top">
+                <div id='showuser'>
+                    
+                </div>
+            </td>
+        </tr></table>
+        
         <div style='float:right'>
             <a href='#' class='button-green' onclick='clearMessage()'>清空</a>
             <a href='#' class='button' onclick='sendMessage()'>发送</a>

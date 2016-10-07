@@ -51,10 +51,17 @@ socket.on('connection',
                             UID.set(client, uid);
                             UNAME.set(client, username);
                             PASSWORD.set(client, password);
+
+                            var res = "";
+
                             for(var [key, val] of UID.entries())
                             {
                                 key.send('<div class="systeminfo">' + username + '加入了。</div>');
+                                key.emit('login', '<div id="user'+ uid +'"><a href="#" onclick="showUser(' + uid + ')"><div class="chatuser"><img align="middle" height="25" width="25" src="/images/user/' + uid + '/head.jpg"/>' + username + '</div></a></div>');
+                                res += '<div id="user'+ uid +'"><a href="#" onclick="showUser(' + uid + ');"><div class="chatuser"><img align="middle" height="25" width="25" src="/images/user/' + val + '/head.jpg"/>' + UNAME.get(key) + '</div></a></div>';
                             }
+                            client.emit('listalluser', res);
+
                             return;
                         }
                     }
@@ -78,9 +85,9 @@ socket.on('connection',
                 for(var [key, val] of UID.entries())
                 {
                     if(uid == val)
-                        key.send('<div><table width="100%"><tr><td><div class="chattext2">' + htmlspecialchars(message) + '</div></td><td class="uid" valign="top"><img height=30 width=30 src="/images/user/' + uid + '/head.jpg"/></td></tr></table></div>');
+                        key.send('<div><table width="100%"><tr><td><div class="chattext2">' + htmlspecialchars(message) + '</div></td><td class="uid" valign="top"><a href="#" onclick="showUser('+ uid +');"><img height=30 width=30 src="/images/user/' + uid + '/head.jpg"/></a></td></tr></table></div>');
                     else
-                        key.send('<div><table width="100%"><tr><td class="uid" valign="top"><img height=30 width=30 src="/images/user/' + uid + '/head.jpg"/></td><td><div class="chattext">' + htmlspecialchars(message) + '</div></td></tr></table></div>');
+                        key.send('<div><table width="100%"><tr><td class="uid" valign="top"><a href="#" onclick="showUser('+ uid +');"><img height=30 width=30 src="/images/user/' + uid + '/head.jpg"/></a></td><td><div class="chattext">' + htmlspecialchars(message) + '</div></td></tr></table></div>');
                 }
             }
         );
@@ -93,12 +100,14 @@ socket.on('connection',
                     return;
 
                 var username = UNAME.get(client);
+                var uid = UID.get(client);
                 UID.delete(client);
                 UNAME.delete(client);
                 PASSWORD.delete(client);
                 for(var [key, val] of UID.entries())
                 {
                     key.send('<div class="systeminfo">' + username + '离开了。</div>');
+                    key.emit('logout', uid);
                 }
             }
         );

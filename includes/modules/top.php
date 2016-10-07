@@ -31,7 +31,7 @@
     </div></a>
     <?php } ?>
     <a href='/mgzd/index.php'><div class='topbox' id='hb1' onMouseOver='mOver("hb1")' onMouseOut='mOut("hb1")' style='width:150px; color: rgb(0, 200, 255);'>
-        冥光之都
+        寂月城
     </div></a>
     <a href='#'><div class='topbox' id='hb2' onMouseOver='mOver("hb2")' onMouseOut='mOut("hb2")'>
         论坛

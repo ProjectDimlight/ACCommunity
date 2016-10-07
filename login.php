@@ -1,7 +1,7 @@
 <?php include("includes/modules/header.php"); ?>
 <?php include("includes/modules/top.php"); ?>
 
-<title>冥光之都 - 登陆</title>
+<title><?php echo($title); ?> - 登陆</title>
 
 <?php
 if(isset($_SESSION['uid']))

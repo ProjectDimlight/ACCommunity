@@ -1,7 +1,7 @@
 <?php include("includes/modules/header.php"); ?>
 <?php include("includes/modules/top.php"); ?>
 
-<title>冥光之都 - 注册</title>
+<title><?php echo($title); ?> - 注册</title>
 
 <?php
 if(isset($_SESSION['uid']))
@@ -9,7 +9,7 @@ if(isset($_SESSION['uid']))
     $uid = $_SESSION['uid'];
     $username = $_SESSION['username'];
 ?>
-    
+    <script type='text/javascript'> window.location.href = '/mgzd/index.php'; </script>
 <?php
 }else
 {
