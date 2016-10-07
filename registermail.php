@@ -4,7 +4,6 @@
     if(!isset($_GET['registercode']) || !isset($_SESSION['registercode']) || $_GET['registercode'] != $_SESSION['registercode'])
     {
         $_SESSION['tmp'] = 0;
-        echo($_GET['registercode'] . "<br/>" . $_SESSION['registercode']);
         session_destroy();
 ?>
 
