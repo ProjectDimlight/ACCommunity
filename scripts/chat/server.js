@@ -97,7 +97,7 @@ socket.on('connection',
                         key.send('<div><table width="100%"><tr><td><div class="chattext2">' + htmlspecialchars(message) + '</div></td><td class="uid" valign="top"><a href="#" onclick="showUser('+ uid +');"><img height=30 width=30 src="/images/user/' + uid + '/head.jpg"/></a></td></tr></table></div>');
                     else
                         key.send('<div><table width="100%"><tr><td class="uid" valign="top"><a href="#" onclick="showUser('+ uid +');"><img height=30 width=30 src="/images/user/' + uid + '/head.jpg"/></a></td><td><div class="chatusername">'+ UNAME.get(client) +'</div><div class="chattext">' + htmlspecialchars(message) + '</div></td></tr></table></div>');
-                }
+                });
             }
         );
 
