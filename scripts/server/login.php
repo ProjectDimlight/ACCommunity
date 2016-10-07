@@ -1,8 +1,11 @@
 <?php
     session_start();
+    echo("<meta charset='utf-8'>");
 
-    $pdo = new PDO("mysql:host=localhost;dbname=projectac;", "access", "");
+    $pdo = new PDO("mysql:host=localhost;dbname=projectac;charset=utf8;", "access", "");
     $pdo->query("use projectac;");
+    $pdo->query("set names 'utf-8';");
+
     $stmt = $pdo->prepare("SELECT uid, nickname, password from user where email = ?");
     $stmt->bindParam(1, $_POST['username'], PDO::PARAM_STR);
     $stmt->execute();
