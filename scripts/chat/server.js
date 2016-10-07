@@ -11,6 +11,7 @@ function htmlspecialchars(str)
 var UID = new Map();
 var UNAME = new Map();
 var PASSWORD = new Map();
+var CLIENT = new Map();
 
 var http = require('http');
 var io = require('socket.io');
@@ -31,7 +32,6 @@ socket.on('connection',
         client.on('login', 
             function(uid, password, username)
             {
-                //console.log(uid + 'joined the chat.');
                 var mysql = require("mysql");
                 var sql = mysql.createConnection({
                     user: 'access',
@@ -42,12 +42,23 @@ socket.on('connection',
 
                 var query = "select password from user where uid = ?";
                 var data = [uid];
+                var flag = true;
 
                 sql.query(query, data,
                     function(err, results, fields)   
                     {
                         if(results && password == results[0].password)
                         {
+                            if(CLIENT.has(uid))
+                            {
+                                var c = CLIENT.get(uid);
+                                CLIENT.delete(uid);
+                                UID.delete(c);
+                                UNAME.delete(c);
+                                PASSWORD.delete(c);
+                            }
+
+                            CLIENT.set(uid, client);
                             UID.set(client, uid);
                             UNAME.set(client, username);
                             PASSWORD.set(client, password);
@@ -57,19 +68,17 @@ socket.on('connection',
                             for(var [key, val] of UID.entries())
                             {
                                 key.send('<div class="systeminfo">' + username + '加入了。</div>');
-                                key.emit('login', '<div id="user'+ uid +'"><a href="#" onclick="showUser(' + uid + ')"><div class="chatuser"><img align="middle" height="25" width="25" src="/images/user/' + uid + '/head.jpg"/>' + username + '</div></a></div>');
-                                res += '<div id="user'+ uid +'"><a href="#" onclick="showUser(' + uid + ');"><div class="chatuser"><img align="middle" height="25" width="25" src="/images/user/' + val + '/head.jpg"/>' + UNAME.get(key) + '</div></a></div>';
+                                key.emit('login', uid, '<div id="user'+ uid +'"><a href="#" onclick="showUser(' + uid + ')"><div class="chatuser"><img align="middle" height="25" width="25" src="/images/user/' + uid + '/head.jpg"/>' + username + '</div></a></div>');
+                                res += '<div id="user'+ val +'"><a href="#" onclick="showUser(' + val + ');"><div class="chatuser"><img align="middle" height="25" width="25" src="/images/user/' + val + '/head.jpg"/>' + UNAME.get(key) + '</div></a></div>';
                             }
                             client.emit('listalluser', res);
-
-                            return;
+                            flag = false;
                         }
                     }
                 );
-
+                
                 sql.end();
-            }
-        );
+            });
 
         client.on('message', 
             function(password, message)
@@ -104,6 +113,8 @@ socket.on('connection',
                 UID.delete(client);
                 UNAME.delete(client);
                 PASSWORD.delete(client);
+                CLIENT.delete(uid);
+
                 for(var [key, val] of UID.entries())
                 {
                     key.send('<div class="systeminfo">' + username + '离开了。</div>');

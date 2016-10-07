@@ -43,18 +43,22 @@ if(isset($_SESSION['uid']))
         );
 
         socket.on('login', 
-            function(message)
+            function(uid, message)
             {
-                var div = document.getElementById('showuser');
-                div.innerHTML += message;
+                if(!document.getElementById('user' + uid))
+                {
+                    var div = document.getElementById('showuser');
+                    div.innerHTML += message;
+                }
             }
         );
 
         socket.on('logout', 
             function(uid)
             {
-                var div = document.getElementById('user' + uid);
-                div.parentNode.removeChild(div);
+                var div;
+                while(div = document.getElementById('user' + uid))
+                    div.parentNode.removeChild(div);
             }
         );
 
@@ -75,7 +79,7 @@ if(isset($_SESSION['uid']))
     }
 
     window.onload = startClient;
-
+    
     function sendMessage()
     {
         var div = document.getElementById('chatinput');
