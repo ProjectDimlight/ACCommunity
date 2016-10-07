@@ -36,9 +36,12 @@ if(isset($_SESSION['uid']))
 <div class='mainnoindent' style='width: 350px; margin: 50 auto;'>
     <form action='/mgzd/scripts/server/login.php'  method="post" name='form1'>
         <div style='width: 100%; text-align:center;'>
+            邮箱
             <input type='text' id='username' name='username' class='login'/><br/>
+            密码
             <input type='password' id='password' name='password' class='login'/><br/>
-            <input type='text' id='id' name='id' class='login'/><br/>
+            验证
+            <input type='text' id='id' name='id' class='login' value='请暂时留空'/><br/>
             <input type="submit" name="submit" value="1" style="display:none"/>
             <?php 
                 if(isset($_GET['url']))

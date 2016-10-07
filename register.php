@@ -42,9 +42,13 @@ if(isset($_SESSION['uid']))
 <div class='mainnoindent' style='width: 350px; margin: 50 auto;'>
     <form action='/mgzd/scripts/server/register.php'  method="post" name='form1'>
         <div style='width: 100%; text-align:center;'>
+            昵称
             <input type='text' id='username' name='username' class='login'/><br/>
+            密码
             <input type='password' id='password' name='password' class='login'/><br/>
+            确认
             <input type='password' id='repeatpassword' name='repeatpassword' class='login'/><br/>
+            邮箱
             <input type='text' id='email' name='email' class='login'/><br/>
             <input type="submit" name="submit" value="1" style="display:none"/>
             <a href='#' onclick='check();'><div class='button' style='width: 170px; margin-bottom: 10px;'>注册</div></a>

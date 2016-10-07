@@ -216,7 +216,7 @@ td.uid
 
 .login
 {
-    width: 200px;
+    width: 160px;
     height: 30px;
     margin: 5px;
     font-size: 18px;
@@ -245,4 +245,12 @@ a
     vertical-align: middle;
     background-color: rgb(200, 255, 255);
     font-size: 12px;
+}
+
+.chatusername
+{
+    height: 12px;
+    color: black;
+    font-size: 6px;
+    padding-bottom:2px;
 }
