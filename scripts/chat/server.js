@@ -96,13 +96,8 @@ socket.on('connection',
                     if(uid == val)
                         key.send('<div><table width="100%"><tr><td><div class="chattext2">' + htmlspecialchars(message) + '</div></td><td class="uid" valign="top"><a href="#" onclick="showUser('+ uid +');"><img height=30 width=30 src="/images/user/' + uid + '/head.jpg"/></a></td></tr></table></div>');
                     else
-<<<<<<< HEAD
                         key.send('<div><table width="100%"><tr><td class="uid" valign="top"><a href="#" onclick="showUser('+ uid +');"><img height=30 width=30 src="/images/user/' + uid + '/head.jpg"/></a></td><td><div class="chatusername">'+ UNAME.get(client) +'</div><div class="chattext">' + htmlspecialchars(message) + '</div></td></tr></table></div>');
                 }
-=======
-                        key.send('<div><table width="100%"><tr><td class="uid" valign="top"><a href="#" onclick="showUser('+ uid +');"><img height=30 width=30 src="/images/user/' + uid + '/head.jpg"/></a></td><td><div class="chattext">' + htmlspecialchars(message) + '</div></td></tr></table></div>');
-                });
->>>>>>> 285b1e10ab59fe0107661a3b94804118a93f3b74
             }
         );
 
