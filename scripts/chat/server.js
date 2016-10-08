@@ -67,9 +67,9 @@ socket.on('connection',
 
                             UID.forEach(function(val, key, map)
                             {
-                                key.send('<div class="systeminfo">' + username + '加入了。</div>');
-                                key.emit('login', uid, '<div id="user'+ uid +'"><a href="#" onclick="showUser(' + uid + ')"><div class="chatuser"><img align="middle" height="25" width="25" src="/images/user/' + uid + '/head.jpg"/>' + username + '</div></a></div>');
-                                res += '<div id="user'+ val +'"><a href="#" onclick="showUser(' + val + ');"><div class="chatuser"><img align="middle" height="25" width="25" src="/images/user/' + val + '/head.jpg"/>' + UNAME.get(key) + '</div></a></div>';
+                                key.send('<div class="systeminfo">' + username.substr(0, 8) + '加入了。</div>');
+                                key.emit('login', uid, '<div id="user'+ uid +'"><a href="#" onclick="showUser(' + uid + ')"><div class="chatuser"><img align="middle" height="25" width="25" src="/images/user/' + uid + '/head.jpg"/>' + username.substr(0, 8) + '</div></a></div>');
+                                res += '<div id="user'+ val +'"><a href="#" onclick="showUser(' + val + ');"><div class="chatuser"><img align="middle" height="25" width="25" src="/images/user/' + val + '/head.jpg"/>' + UNAME.get(key).substr(0, 8) + '</div></a></div>';
                             });
                             client.emit('listalluser', res);
                             flag = false;
@@ -96,7 +96,7 @@ socket.on('connection',
                     if(uid == val)
                         key.send('<div><table width="100%"><tr><td><div class="chattext2">' + htmlspecialchars(message) + '</div></td><td class="uid" valign="top"><a href="#" onclick="showUser('+ uid +');"><img height=30 width=30 src="/images/user/' + uid + '/head.jpg"/></a></td></tr></table></div>');
                     else
-                        key.send('<div><table width="100%"><tr><td class="uid" valign="top"><a href="#" onclick="showUser('+ uid +');"><img height=30 width=30 src="/images/user/' + uid + '/head.jpg"/></a></td><td><div class="chatusername">'+ UNAME.get(client) +'</div><div class="chattext">' + htmlspecialchars(message) + '</div></td></tr></table></div>');
+                        key.send('<div><table width="100%"><tr><td class="uid" valign="top"><a href="#" onclick="showUser('+ uid +');"><img height=30 width=30 src="/images/user/' + uid + '/head.jpg"/></a></td><td><div class="chatusername">'+ UNAME.get(client).substr(0, 11) +'</div><div class="chattext">' + htmlspecialchars(message) + '</div></td></tr></table></div>');
                 });
             }
         );
@@ -117,7 +117,7 @@ socket.on('connection',
 
                 UID.forEach(function(val, key, map)
                 {
-                    key.send('<div class="systeminfo">' + username + '离开了。</div>');
+                    key.send('<div class="systeminfo">' + username.substr(0, 8) + '离开了。</div>');
                     key.emit('logout', uid);
                 });
             }

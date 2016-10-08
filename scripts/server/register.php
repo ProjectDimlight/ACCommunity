@@ -32,14 +32,16 @@
         $_SESSION['password'] = $_POST['password'];
         $_SESSION['email'] = $_POST['email'];
 
-        $msg = '请点击<a href="http://' . $hostip . ':' . $hostport . '/mgzd/registermail.php?registercode=' . $_SESSION['registercode'] . '">链接</a>或复制以下内容到地址栏完成注册：<br/>http://' . $hostip . ':' . $hostport . '/mgzd/registermail.php?registercode=' . $_SESSION['registercode'];
+        $msg = '<div>请点击<a href="http://' . $hostip . ':' . $hostport . '/mgzd/registermail.php?registercode=' . $_SESSION['registercode'] . '">链接</a>或复制以下内容到地址栏完成注册：</div><div>http://' . $hostip . ':' . $hostport . '/mgzd/registermail.php?registercode=' . $_SESSION['registercode'].'</div>';
         
+        /*
         $mail = new MySendMail();
-        $mail->setServer("smtp.qq.com", "1846326091", "cszvptingdredcfj", 465, true); //设置smtp服务器，到服务器的SSL连接
-        $mail->setFrom("1846326091@qq.com"); //设置发件人
+        $mail->setServer("smtp.163.com", "projectwta@163.com", "99aea806d116dc40", 465, true); //设置smtp服务器，到服务器的SSL连接
+        $mail->setFrom("projectwta@163.com"); //设置发件人
         $mail->setReceiver($_POST['email']); //设置收件人，多个收件人，调用多次
         $mail->setMail('注册验证 - ProjectAC::寂月城', $msg);
         $mail->sendMail(); 
+	*/
     }
 ?>
 
@@ -52,7 +54,8 @@
 </div>
 
 <div class='main'>
-    请通过邮件中的链接完成验证。
+    <!-- 请通过邮件中的链接完成验证。!-->
+    <?php echo($msg);  ?>
 </div>
 
 <?php include("../../includes/modules/footer.php"); ?>
