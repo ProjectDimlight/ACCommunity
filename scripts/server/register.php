@@ -6,7 +6,7 @@
 <?php
     require_once "emailssl.class.php";
 
-    $pdo = new PDO("mysql:host=localhost;dbname=projectac;", "access", "");
+    $pdo = new PDO("mysql:host=localhost;dbname=projectac;charset=utf8", "access", "");
     $pdo->query("use projectac;");
 
     $stmt = $pdo->prepare("SELECT uid from user where email = ?");

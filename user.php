@@ -8,7 +8,7 @@
         $username = $_SESSION['username'];
     }
 
-        $pdo = new PDO("mysql:host=localhost;dbname=projectac;", "access", "");
+        $pdo = new PDO("mysql:host=localhost;dbname=projectac;charset=utf8;", "access", "");
         $pdo->query("use projectac;");
         $stmt = $pdo->prepare("SELECT * from user where uid = ?");
         if(isset($_GET['uid']))

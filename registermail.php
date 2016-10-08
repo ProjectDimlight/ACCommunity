@@ -17,7 +17,7 @@
     }else
     {
         $tmp = md5($_SESSION['password']);
-        $pdo = new PDO("mysql:host=localhost;dbname=projectac;", "access", "");
+        $pdo = new PDO("mysql:host=localhost;dbname=projectac;charset=utf8;", "access", "");
         $pdo->query("use projectac;");
         $stmt = $pdo->prepare("INSERT INTO user (nickname, password, time, vip, exp, ban, email, op, sex, motto) values (?, ?, now(), 0, 0, 0, ?, 0, 0, '');");
         $stmt->bindParam(1, $_SESSION['nickname'], PDO::PARAM_STR);
@@ -30,8 +30,8 @@
         $stmt->execute();
 
         $row = $stmt->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_NEXT);
-        mkdir($_SERVER['DOCUMENT_ROOT'] . "images/user/" . $row[0]);
-        copy($_SERVER['DOCUMENT_ROOT'] . "images/system/defaulthead.jpg", $_SERVER['DOCUMENT_ROOT'] . "images/user/" . $row[0] . "/head.jpg");
+        mkdir($_SERVER['DOCUMENT_ROOT'] . "/images/user/" . $row[0]);
+        copy($_SERVER['DOCUMENT_ROOT'] . "/images/system/defaulthead.jpg", $_SERVER['DOCUMENT_ROOT'] . "/images/user/" . $row[0] . "/head.jpg");
 
         session_destroy();
 ?>
