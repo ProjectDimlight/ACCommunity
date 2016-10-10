@@ -3,13 +3,7 @@
 
 <title><?php echo($title); ?>  - 版聊</title>
 
-<?php
-if(isset($_SESSION['uid']))
-{
-    $uid = $_SESSION['uid'];
-    $username = $_SESSION['username'];
-    $password = $_SESSION['password'];
-?>
+<?php include($_SERVER['DOCUMENT_ROOT'] . "/mgzd/includes/modules/checkuid.php"); ?>
 
 <?php echo('<script src="http://' . $hostip. ':' . $hostport . '/mgzd/scripts/chat/node_modules/socket.io-client/socket.io.js"></script>'); ?>
 <script type="text/javascript">
@@ -135,18 +129,5 @@ if(isset($_SESSION['uid']))
         </div>
     </div>
 </div>
-
-<?php
-}else
-{
-?>
-
-<script>
-    window.location.href = '/mgzd/login.php?url=' + window.location.href;
-</script> 
-
-<?php
-}
-?>
 
 <?php include("includes/modules/footer.php"); ?>

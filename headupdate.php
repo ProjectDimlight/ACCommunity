@@ -3,6 +3,8 @@
 
 <title><?php echo($title); ?></title>
 
+<?php include($_SERVER['DOCUMENT_ROOT'] . "/mgzd/includes/modules/checkuid.php"); ?>
+
 <div class='title'>
     <h1>上传头像</h1>
 </div>

@@ -1,13 +1,9 @@
 <?php include("includes/modules/header.php"); ?>
 <?php include("includes/modules/top.php"); ?>
 
-<?php 
-    if(isset($_SESSION['uid']))
-    {
-        $uid = $_SESSION['uid'];
-        $username = $_SESSION['username'];
-    }
+<?php include($_SERVER['DOCUMENT_ROOT'] . "/mgzd/includes/modules/checkuid.php"); ?>
 
+<?php 
         $pdo = new PDO("mysql:host=localhost;dbname=projectac;charset=utf8;", "access", "");
         $pdo->query("use projectac;");
         $stmt = $pdo->prepare("SELECT * from user where uid = ?");

@@ -2,7 +2,7 @@
     session_start();
     echo("<meta charset='utf-8'>");
 
-    if(strlen($_POST['email']) > 30)
+    if(strlen($_POST['email']) > 60)
     {
         echo("<script type='text/javascript'> alert('用户名、邮箱太长！'); window.location.href = '/mgzd/userupdate.php';</script>");
         exit();

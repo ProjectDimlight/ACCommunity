@@ -9,7 +9,7 @@ if(isset($_SESSION['uid']))
     $uid = $_SESSION['uid'];
     $username = $_SESSION['username'];
 ?>
-    
+    <script type='text/javascript'> window.location.href = '/mgzd/index.php'; </script>
 <?php
 }else
 {

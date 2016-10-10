@@ -1,24 +1,25 @@
 <?php include("includes/modules/header.php"); ?>
 <?php include("includes/modules/top.php"); ?>
 
+<?php include($_SERVER['DOCUMENT_ROOT'] . "/mgzd/includes/modules/checkuid.php"); ?>
+
 <?php 
-    if(isset($_SESSION['uid']))
+    $pdo = new PDO("mysql:host=localhost;dbname=projectac;charset=utf8;", "access", "");
+    $pdo->query("use projectac;");
+    $stmt = $pdo->prepare("SELECT * from user where uid = ?");
+    if(isset($_GET['uid']))
+        $stmt->bindParam(1, $_GET['uid'], PDO::PARAM_INT);
+    else
+        $stmt->bindParam(1, $uid, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $flag = false;
+    $row = $stmt->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_NEXT);
+    if(!$row)
     {
-        $uid = $_SESSION['uid'];
-        $username = $_SESSION['username'];
+        echo('<script type="text/javascript">alert("未找到相应数据！");window.location.href="/mgzd/user.php";</script>)');
+        exit();
     }
-
-        $pdo = new PDO("mysql:host=localhost;dbname=projectac;charset=utf8;", "access", "");
-        $pdo->query("use projectac;");
-        $stmt = $pdo->prepare("SELECT * from user where uid = ?");
-        if(isset($_GET['uid']))
-            $stmt->bindParam(1, $_GET['uid'], PDO::PARAM_INT);
-        else
-            $stmt->bindParam(1, $uid, PDO::PARAM_INT);
-        $stmt->execute();
-
-        $flag = false;
-        $row = $stmt->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_NEXT);
 ?>
 
 <title><?php echo($row[1]." - ".$title); ?></title>
@@ -37,7 +38,10 @@
             <?php echo('<img height=150 width=150 src="/images/user/' . $row[0] . '/head.jpg"/>'); ?>
         </div>
         <div>
-            <a href='userupdate.php'><div class='button' style='width:120px;'>修改</div></a>
+        <?php
+            if(!isset($_GET['uid']) || $_GET['uid'] == $_SESSION['uid'])
+                echo("<a href='userupdate.php'><div class='button' style='width:120px;'>修改</div></a>");
+        ?>
         </div>
     </div>
 

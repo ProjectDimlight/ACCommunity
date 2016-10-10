@@ -6,7 +6,7 @@
 <?php
     require_once "emailssl.class.php";
 
-    if(strlen($_POST['username']) > 30 || strlen($_POST['email']) > 30)
+    if(strlen($_POST['username']) > 60 || strlen($_POST['email']) > 60)
     {
         echo("<script type='text/javascript'> alert('用户名、邮箱太长！'); window.location.href = '/mgzd/register.php</script>");
         exit();

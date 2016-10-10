@@ -2,15 +2,11 @@
     session_start();
     echo("<meta charset='utf-8'>");
 
-    if(strlen($_POST['username']) > 30 || strlen($_POST['motto']) > 500)
+    include($_SERVER['DOCUMENT_ROOT'] . "/mgzd/includes/modules/checkuid.php");
+
+    if(strlen($_POST['username']) > 60 || strlen($_POST['motto']) > 1000)
     {
         echo("<script type='text/javascript'> alert('用户名或格言太长！'); window.location.href = '/mgzd/userupdate.php';</script>");
-        exit();
-    }
-
-    if(!isset($_SESSION['uid']))
-    {
-        echo("<script type='text/javascript'>window.location.href = '/mgzd/login.php?url=' + window.location.href;</script>");
         exit();
     }
 
@@ -53,5 +49,5 @@
         $stmt->execute();
     }
     
-    //echo("<script type='text/javascript'> window.location.href = 'logout.php'; </script>");
+    echo("<script type='text/javascript'> window.location.href = 'logout.php'; </script>");
 ?>
