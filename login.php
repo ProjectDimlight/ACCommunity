@@ -23,10 +23,10 @@ if(isset($_SESSION['uid']))
     
 </div>
 
-<script>
+<script type='text/javascript'>
     function check()
     {
-        if(document.getElementById('username').value == '' || document.getElementById('password').value == '')
+        if(document.getElementById('email').value == '' || document.getElementById('password').value == '')
             alert("请完整填写登录信息哦~");
         else
             document.form1.submit.click();
