@@ -40,7 +40,7 @@
 <div class='mainnoindent' style='margin: 50 auto; text-align:center; width: 350px;'>
     <form action='/mgzd/scripts/server/headupdate.php'  method="post" name='form1' enctype="multipart/form-data">
         <input type="submit" name="submit" value="1" style="display:none"/>
-        <input type='file' id='file' name='file' style='width:295px; border:1px solid;' onchange='change()'/>
+        <input type='file' id='file' name='file' style='width:295px; margin-left:6px; border:1px solid;' onchange='change()'/>
         <br/>
         <div>
         <?php echo('<img name="big" height=150 width=150 src="/images/user/' . $_SESSION['uid'] . '/head.jpg"/>'); ?>
