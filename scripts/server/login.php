@@ -7,7 +7,7 @@
     $pdo->query("set names 'utf-8';");
 
     $stmt = $pdo->prepare("SELECT uid, nickname, password from user where email = ?");
-    $stmt->bindParam(1, $_POST['email'], PDO::PARAM_STR);
+    $stmt->bindParam(1, htmlspecialchars($_POST['email']), PDO::PARAM_STR);
     $stmt->execute();
 
     $flag = false;
@@ -25,7 +25,7 @@
 
     if($flag)
     {
-        echo("<script type='text/javascript'> window.location.href = '". $_POST['url'] ."'; </script>");
+        echo("<script type='text/javascript'> window.location.href = '". htmlspecialchars($_POST['url']) ."'; </script>");
     }else
     {
         echo("<script type='text/javascript'> window.location.href = '/mgzd/login.php'; </script>");

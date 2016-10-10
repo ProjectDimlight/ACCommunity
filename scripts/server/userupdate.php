@@ -27,18 +27,18 @@
     {
         $tmp = md5($_POST['newpswd']);
         $stmt = $pdo->prepare("UPDATE user SET nickname = ?, password = ?, sex = ?, motto = ? WHERE uid = ?");
-        $stmt->bindParam(1, $_POST['username'], PDO::PARAM_STR);
+        $stmt->bindParam(1, htmlspecialchars($_POST['username']), PDO::PARAM_STR);
         $stmt->bindParam(2, $tmp, PDO::PARAM_STR);
         $stmt->bindParam(3, $_POST['sex'], PDO::PARAM_INT);
-        $stmt->bindParam(4, $_POST['motto'], PDO::PARAM_STR);
+        $stmt->bindParam(4, htmlspecialchars($_POST['motto']), PDO::PARAM_STR);
         $stmt->bindParam(5, $_SESSION['uid'], PDO::PARAM_INT);
         $stmt->execute();
     }else
     {
         $stmt = $pdo->prepare("UPDATE user SET nickname = ?, sex = ?, motto = ? WHERE uid = ?");
-        $stmt->bindParam(1, $_POST['username'], PDO::PARAM_STR);
+        $stmt->bindParam(1, htmlspecialchars($_POST['username']), PDO::PARAM_STR);
         $stmt->bindParam(2, $_POST['sex'], PDO::PARAM_INT);
-        $stmt->bindParam(3, $_POST['motto'], PDO::PARAM_STR);
+        $stmt->bindParam(3, htmlspecialchars($_POST['motto']), PDO::PARAM_STR);
         $stmt->bindParam(4, $_SESSION['uid'], PDO::PARAM_INT);
         $stmt->execute();
     }

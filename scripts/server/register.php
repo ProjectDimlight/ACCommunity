@@ -10,7 +10,7 @@
     $pdo->query("use projectac;");
 
     $stmt = $pdo->prepare("SELECT uid from user where email = ?");
-    $stmt->bindParam(1, $_POST['email'], PDO::PARAM_STR);
+    $stmt->bindParam(1, htmlspecialchars($_POST['email']), PDO::PARAM_STR);
     $stmt->execute();
 
     $flag = false;
@@ -28,9 +28,9 @@
     {
     
         $_SESSION['registercode'] = rand() * 32768 + rand();
-        $_SESSION['nickname'] = $_POST['username'];
+        $_SESSION['nickname'] = htmlspecialchars($_POST['username']);
         $_SESSION['password'] = $_POST['password'];
-        $_SESSION['email'] = $_POST['email'];
+        $_SESSION['email'] = htmlspecialchars($_POST['email']);
 
         $msg = '<div>请点击<a href="http://' . $hostip . ':' . $hostport . '/mgzd/registermail.php?registercode=' . $_SESSION['registercode'] . '">链接</a>或复制以下内容到地址栏完成注册：</div><div>http://' . $hostip . ':' . $hostport . '/mgzd/registermail.php?registercode=' . $_SESSION['registercode'].'</div>';
         
