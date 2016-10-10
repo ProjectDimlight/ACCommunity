@@ -2,12 +2,19 @@
     session_start();
     echo("<meta charset='utf-8'>");
 
+    if(strlen($_POST['email']) > 30)
+    {
+        echo("<script type='text/javascript'> alert('用户名、邮箱太长！'); window.location.href = '/mgzd/userupdate.php';</script>");
+        exit();
+    }
+
     $pdo = new PDO("mysql:host=localhost;dbname=projectac;charset=utf8;", "access", "");
     $pdo->query("use projectac;");
     $pdo->query("set names 'utf-8';");
 
+    $tmp = htmlspecialchars($_POST['email']);
     $stmt = $pdo->prepare("SELECT uid, nickname, password from user where email = ?");
-    $stmt->bindParam(1, htmlspecialchars($_POST['email']), PDO::PARAM_STR);
+    $stmt->bindParam(1, $tmp, PDO::PARAM_STR);
     $stmt->execute();
 
     $flag = false;

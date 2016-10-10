@@ -111,12 +111,12 @@
                 <?php echo($row[8]); ?>
             </td>
         </tr>
-        <tr>
+        <tr valign='top'>
             <td>
                 格言
             </td>
-            <td>
-                <?php echo($row[4]); ?>
+            <td style="text-indent:0em; padding-left:2em;">
+                <div style='white-space:pre-wrap;'><?php echo($row[4]); ?></div>
             </td>
         </tr>
     </table>
