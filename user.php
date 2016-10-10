@@ -32,9 +32,15 @@
 </div>
 
 <div class='main'>
-    <div style='float:right'>
-        <?php echo('<img height=100 width=100 src="/images/user/' . $row[0] . '/head.jpg"/>'); ?>
+    <div style='float:right; text-indent:0;'>
+        <div style='text-align:right; margin-bottom:15px'>
+            <?php echo('<img height=150 width=150 src="/images/user/' . $row[0] . '/head.jpg"/>'); ?>
+        </div>
+        <div>
+            <a href='userupdate.php'><div class='button' style='width:120px;'>修改</div></a>
+        </div>
     </div>
+
     <table>
         <tr>
             <td>
@@ -91,7 +97,7 @@
         </tr>
         <tr>
             <td>
-                上次登录时间
+                注册时间
             </td>
             <td>
                 <?php echo($row[3]); ?>

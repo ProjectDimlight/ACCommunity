@@ -37,7 +37,7 @@ if(isset($_SESSION['uid']))
     <form action='/mgzd/scripts/server/login.php'  method="post" name='form1'>
         <div style='width: 100%; text-align:center;'>
             邮箱
-            <input type='text' id='username' name='username' class='login'/><br/>
+            <input type='text' id='email' name='email' class='login'/><br/>
             密码
             <input type='password' id='password' name='password' class='login'/><br/>
             验证
@@ -49,8 +49,8 @@ if(isset($_SESSION['uid']))
                 else
                     echo('<input type="text" name="url" value="/mgzd" style="display:none"/>');
             ?>
-            <a href='#' onclick='check();'><div class='button' style='width: 170px; margin-bottom: 10px;'>登陆</div></a>
-            <a href='register.php'><div class='button-green' style='width: 170px;'>注册</div></a>
+            <a href='#' onclick='check();'><div class='button' style='width: 200px; margin-bottom: 10px;'>登陆</div></a>
+            <a href='register.php'><div class='button-green' style='width: 200px;'>注册</div></a>
         </div>
     </form>
 </div>

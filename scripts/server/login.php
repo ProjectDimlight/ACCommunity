@@ -7,7 +7,7 @@
     $pdo->query("set names 'utf-8';");
 
     $stmt = $pdo->prepare("SELECT uid, nickname, password from user where email = ?");
-    $stmt->bindParam(1, $_POST['username'], PDO::PARAM_STR);
+    $stmt->bindParam(1, $_POST['email'], PDO::PARAM_STR);
     $stmt->execute();
 
     $flag = false;

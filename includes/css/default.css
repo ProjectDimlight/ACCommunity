@@ -184,12 +184,13 @@ p
     border-radius: 3px 3px 3px 3px;
     text-align: center;
     height: 30px;
-    padding: 5px;
+    padding: 1px;
     padding-left: 15px;
     padding-right: 15px;
     margin: 3px auto;
     text-decoration: none;
     color: white;
+    text-indent:0px;
 }
 
 .button-green
@@ -199,11 +200,12 @@ p
     text-align: center;
     height: 30px;
     margin: 3px auto;
-    padding: 5px;
+    padding: 1px;
     padding-left: 15px;
     padding-right: 15px;
     text-decoration: none;
     color: white;
+    text-indent:0px;
 }
 
 td.uid
@@ -216,10 +218,10 @@ td.uid
 
 .login
 {
-    width: 160px;
-    height: 30px;
-    margin: 5px;
-    font-size: 18px;
+    width: 195px;
+    height: 23px;
+    margin: 0px;
+    font-size: 15px;
 }
 
 a

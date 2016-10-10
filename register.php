@@ -51,8 +51,8 @@ if(isset($_SESSION['uid']))
             邮箱
             <input type='text' id='email' name='email' class='login'/><br/>
             <input type="submit" name="submit" value="1" style="display:none"/>
-            <a href='#' onclick='check();'><div class='button' style='width: 170px; margin-bottom: 10px;'>注册</div></a>
-            <a href='login.php'><div class='button-green' style='width: 170px;'>登陆</div></a>
+            <a href='#' onclick='check();'><div class='button' style='width: 200px; margin-bottom: 10px;'>注册</div></a>
+            <a href='login.php'><div class='button-green' style='width: 200px;'>登陆</div></a>
         </div>
     </form>
 </div>

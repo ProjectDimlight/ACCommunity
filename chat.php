@@ -122,7 +122,7 @@ if(isset($_SESSION['uid']))
                 <div id='showchat' class='chatbox'><br/></div>
                 <textarea class='chatinput' id='chatinput'></textarea>
             </td>
-            <td style='width:150px; border:1px solid; overflow: scroll;' valign="top">
+            <td style='width:180px; border:1px solid; overflow: scroll;' valign="top">
                 <div id='showuser'>
                     
                 </div>
