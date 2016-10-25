@@ -34,7 +34,7 @@
     }
 </script>
 
-<div class='main'>
+<div class='main' style='width: 800px; margin:50px auto;'>
     <div style='float:right; text-indent:0;'>
         <div style='text-align:right; margin-bottom:15px'>
             <a href='headupdate.php'><?php echo('<img height=150 width=150 src="/images/user/' . $row[0] . '/head.jpg"/>'); ?></a>
@@ -49,10 +49,10 @@
     
     <input type="submit" name="submit" value="1" style="display:none"/>
 
-    <table style='width: auto'>
+    <table style='width: auto;'>
         <tr style='width: 100%;'>
-            <td>
-                用户编号
+            <td style='width: 60px;'>
+                编号
             </td>
             <td>
                 <?php echo($row[0]); ?>
@@ -63,17 +63,17 @@
                 昵称
             </td>
             <td>
-                <?php echo('<input type="text" class="login" style="width:580px" name="username" value="' . $row[1] . '" />'); ?>
+                <?php echo('<input type="text" class="login" style="width:510px" name="username" value="' . $row[1] . '" />'); ?>
             </td>
         </tr>
         <tr style='width: 100%;'>
             <td>
                 密码
             </td>
-            <td>
-                <?php echo('<input type="password" class="login" style="width:192px" name="password" />'); ?>
-                <?php echo('<input type="password" class="login" style="width:190px" name="newpswd" />'); ?>
-                <?php echo('<input type="password" class="login" style="width:190px" name="cfmpswd" />'); ?>
+            <td style='letter-spacing: 0px;'>
+                <?php echo('<input type="password" class="login" style="width:163px; margin: 0px;" name="password" />'); ?>
+                <?php echo('<input type="password" class="login" style="width:164px; margin: 0px;" name="newpswd" />'); ?>
+                <?php echo('<input type="password" class="login" style="width:164px; margin: 0px;" name="cfmpswd" />'); ?>
             </td>
         </tr>
         <tr style='width: 100%;'>
@@ -85,7 +85,7 @@
                     $selected = ["", "", "", "", "", ""];
                     $selected[$row[10]] = "selected";
 
-                    echo('<select class="login" style="width:580px" name="sex">');
+                    echo('<select class="login" style="width:510px" name="sex">');
                     echo('<option value ="0" '.$selected[0].'>保密的</option>');
                     echo('<option value ="1" '.$selected[1].'>帅哥</option>');
                     echo('<option value ="2" '.$selected[2].'>萌妹</option>');
@@ -100,8 +100,8 @@
             <td valign="top">
                 格言
             </td>
-            <td style='width: 550px;'>
-                <textarea name='motto' style='width: 580px; height:120px; font-size: 15px;'><?php echo($row[4]); ?></textarea>
+            <td style='width: 540px;'>
+                <textarea name='motto' style='width: 510px; height:120px; font-size: 15px;'><?php echo($row[4]); ?></textarea>
             </td>
         </tr>
     </table>

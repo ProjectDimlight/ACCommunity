@@ -109,23 +109,23 @@
 
 </script>
 
-<div style='width:100%;'>
+<div style='width: 95%; margin: 40px auto;'>
     <div class='mainchat'>
         <table style='width:100%'><tr>
             <td style='width:auto;'>
                 <div id='showchat' class='chatbox'><br/></div>
                 <textarea class='chatinput' id='chatinput'></textarea>
             </td>
-            <td style='width:180px; border:1px solid; overflow: scroll;' valign="top">
-                <div id='showuser'>
+            <td style='width:180px; border:0px; background-color: rgb(100, 120, 135); overflow: scroll;' valign="top">
+                <div id='showuser' style='margin: 0px; padding: 0px;'>
                     
                 </div>
             </td>
         </tr></table>
         
         <div style='float:right'>
-            <a href='#' class='button-green' onclick='clearMessage()'>清空</a>
-            <a href='#' class='button' onclick='sendMessage()'>发送</a>
+            <a href='#' onclick='clearMessage()'><font class='button-green' >清空</font></a>
+            <a href='#' onclick='sendMessage()'><font class='button' >发送</font></a>
         </div>
     </div>
 </div>

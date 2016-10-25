@@ -35,6 +35,6 @@
         echo("<script type='text/javascript'> window.location.href = '". htmlspecialchars($_POST['url']) ."'; </script>");
     }else
     {
-        echo("<script type='text/javascript'> window.location.href = '/mgzd/login.php'; </script>");
+        echo("<script type='text/javascript'> alert('登陆验证失败咯，请重试～'); window.location.href = '/mgzd/login.php'; </script>");
     }
 ?>

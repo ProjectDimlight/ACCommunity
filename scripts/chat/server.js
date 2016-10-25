@@ -72,9 +72,9 @@ socket.on('connection',
 
                             UID.forEach(function(val, key, map)
                             {
-                                key.send('<div class="systeminfo">' + show(username, 12) + '加入了。</div>');
-                                key.emit('login', uid, '<div id="user'+ uid +'"><a href="#" onclick="showUser(' + uid + ')"><div class="chatuser"><img align="middle" height="25" width="25" src="/images/user/' + uid + '/head.jpg"/>' + show(username, 12) + '</div></a></div>');
-                                res += '<div id="user'+ val +'"><a href="#" onclick="showUser(' + val + ');"><div class="chatuser"><img align="middle" height="25" width="25" src="/images/user/' + val + '/head.jpg"/>' + show(UNAME.get(key), 12) + '</div></a></div>';
+                                //key.send('<div class="systeminfo">' + show(username, 12) + '加入了。</div>');
+                                key.emit('login', uid, '<div id="user'+ uid +'"><a href="#" onclick="showUser(' + uid + ')"><div class="chatuser"><img align="middle" height="25" width="25" src="/images/user/' + uid + '/head.jpg"/> ' + show(username, 12) + '</div></a></div>');
+                                res += '<div id="user'+ val +'"><a href="#" onclick="showUser(' + val + ');"><div class="chatuser"><img align="middle" height="25" width="25" src="/images/user/' + val + '/head.jpg"/> ' + show(UNAME.get(key), 12) + '</div></a></div>';
                             });
                             client.emit('listalluser', res);
                             flag = false;
@@ -88,7 +88,7 @@ socket.on('connection',
         client.on('message', 
             function(password, message)
             {
-                if(message == '' || strlen(message) > 200)
+                if(message == '' || message.strlen > 200)
                     return;
 
                 if(!PASSWORD.has(client) || password != PASSWORD.get(client))
@@ -99,9 +99,9 @@ socket.on('connection',
                 UID.forEach(function(val, key, map)
                 {
                     if(uid == val)
-                        key.send('<div><table width="100%"><tr><td><div class="chattext2">' + htmlspecialchars(message) + '</div></td><td class="uid" valign="top"><a href="#" onclick="showUser('+ uid +');"><img height=30 width=30 src="/images/user/' + uid + '/head.jpg"/></a></td></tr></table></div>');
+                        key.send('<div><table width="100%"><tr><td><div class="chattext2">' + htmlspecialchars(message) + '</div></td><td class="uid" valign="top"><a href="#" onclick="showUser('+ uid +');"><img class="headsmall" src="/images/user/' + uid + '/head.jpg"/></a></td></tr></table></div>');
                     else
-                        key.send('<div><table width="100%"><tr><td class="uid" valign="top"><a href="#" onclick="showUser('+ uid +');"><img height=30 width=30 src="/images/user/' + uid + '/head.jpg"/></a></td><td><div class="chatusername">'+ show(UNAME.get(client), 20) +'</div><div class="chattext">' + htmlspecialchars(message) + '</div></td></tr></table></div>');
+                        key.send('<div><table width="100%"><tr><td class="uid" valign="top"><a href="#" onclick="showUser('+ uid +');"><img class="headsmall" src="/images/user/' + uid + '/head.jpg"/></a></td><td><div class="chatusername">'+ show(UNAME.get(client), 20) +'</div><div class="chattext">' + htmlspecialchars(message) + '</div></td></tr></table></div>');
                 });
             }
         );
@@ -122,7 +122,7 @@ socket.on('connection',
 
                 UID.forEach(function(val, key, map)
                 {
-                    key.send('<div class="systeminfo">' + show(username, 12) + '离开了。</div>');
+                    //key.send('<div class="systeminfo">' + show(username, 12) + '离开了。</div>');
                     key.emit('logout', uid);
                 });
             }
