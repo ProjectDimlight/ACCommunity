@@ -13,7 +13,7 @@
     $pdo->query("set names 'utf-8';");
 
     $tmp = htmlspecialchars($_POST['email']);
-    $stmt = $pdo->prepare("SELECT uid, nickname, password from user where email = ?");
+    $stmt = $pdo->prepare("SELECT uid, nickname, password, op from user where email = ?");
     $stmt->bindParam(1, $tmp, PDO::PARAM_STR);
     $stmt->execute();
 
@@ -25,7 +25,8 @@
             $flag = true;
             $_SESSION['uid'] = $row[0];
             $_SESSION['username'] = $row[1];
-            $_SESSION['password'] = md5($_POST['password']);
+            $_SESSION['password'] = $row[2];
+            $_SESSION['isop'] = $row[3];
             break;
         }
     }

@@ -25,15 +25,11 @@
 <title><?php echo($row[1]." - ".$title); ?></title>
 
 <div class='mainnoindent' style='width: 650px; height:500px; margin: 50 auto;'>
-    <div style='float:right; text-indent:0;'>
-        
-    </div>
-
     <div style='float:left; padding-bottom:20px; width:100%;'>
         <?php echo('<div style="float:left; padding-left: 50px;"><img class="headbig" src="/images/user/' . $row[0] . '/head.jpg"/></div>'); ?>
 
         <div style="float:left; padding-left: 70px; padding-top:15px;">
-        <font style="font-weight:bold; font-size: 30px;">
+        <font style='font-weight:bold; font-size: 30px; font-family: font-family: "Times New Roman Italic", "Courier New", "Ubuntu", "楷体", "微软雅黑", "黑体"; '>
         <?php 
             $res = '';
             if($row[10] == 1)
@@ -50,7 +46,7 @@
         ?>
         </font>
         <?php
-            echo("<div style='line-height:20px'><br/>");
+            echo("<div style='line-height:20px; font-family: \"Times New Roman Italic\", \"Courier New\", \"Ubuntu\", \"楷体\", \"微软雅黑\", \"黑体\";'><br/>");
             echo('等级 <div style="display: inline-block; border:white 1px solid; width: 300px; height: 11px;"><img src="/images/system/greenbar.png"  width="'.($row[6] * 299 / 99999 + 1).'px" height="11px" /></div><br/>');
             echo('特权 <div style="display: inline-block; border:white 1px solid; width: 300px; height: 11px;"><img src="/images/system/orangebar.png" width="'.($row[5] * 299 / 13 + 1).'px" height="11px" /></div><br/>');
             echo('信用 <div style="display: inline-block; border:white 1px solid; width: 300px; height: 11px;"><img src="/images/system/purplebar.png" width="300px" height="11px" /></div><br/>');
@@ -58,7 +54,7 @@
         ?>
         </div>
     </div>
-    <div style='float:left width:100%;'>
+    <div style='float:left; width:100%;'>
         <div class='block' style='float:left'>用户ID<br/>#<?php echo($row[0]); ?></div>
         <div class='block' style='float:left'>电子邮箱<br/><?php echo($row[8]); ?></div>
         <div class='block' style='float:left'>注册时间<br/><?php echo($row[3]); ?></div>
